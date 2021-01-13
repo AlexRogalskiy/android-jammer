@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="cityfreqs.com.pilfershushjammer">
+
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
+    </queries>
+
+    <application
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="sensorPortrait"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:ignore="LockedOrientationActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".jammers.PassiveJammerService"
+            android:foregroundServiceType="microphone"
+            android:enabled="true"
+            android:exported="false"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/passive_service_name">
+            <intent-filter>
+                <action android:name="cityfreqs.com.pilfershushjammer.action.START_PASSIVE" />
+                <action android:name="cityfreqs.com.pilfershushjammer.action.STOP_PASSIVE" />
+                <action android:name="cityfreqs.com.pilfershushjammer.action.WIDGET_PASSIVE" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".jammers.ActiveJammerService"
+            android:enabled="true"
+            android:exported="false"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/active_service_name">
+            <intent-filter>
+                <action android:name="cityfreqs.com.pilfershushjammer.action.START_ACTIVE" />
+                <action android:name="cityfreqs.com.pilfershushjammer.action.STOP_ACTIVE" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name="cityfreqs.com.pilfershushjammer.assist.AssistJammerService"
+            android:permission="android.permission.BIND_VOICE_INTERACTION">
+            <meta-data
+                android:name="android.voice_interaction"
+                android:resource="@xml/assist_service"/>
+            <intent-filter>
+                <action android:name="android.service.voice.VoiceInteractionService"/>
+            </intent-filter>
+        </service>
+
+        <service
+            android:name="cityfreqs.com.pilfershushjammer.assist.AssistJammerSessionService"
+            android:permission="android.permission.BIND_VOICE_INTERACTION"/>
+
+        <receiver
+            android:name=".utilities.BootReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".utilities.PassiveControlWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/passive_control_widget_info" />
+        </receiver>
+
+    </application>
+
+</manifest>

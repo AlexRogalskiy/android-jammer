@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.HomeFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/half_margin"
+        android:layout_marginEnd="@dimen/half_margin"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:id="@+id/jammer_button_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_view_margin"
+            android:layout_marginStart="@dimen/main_margin"
+            android:layout_marginEnd="@dimen/main_margin"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/mini_margin"
+            android:paddingTop="@dimen/main_margin"
+            app:layout_constraintTop_toBottomOf="@+id/home_layout">
+
+            <ToggleButton
+                android:id="@+id/run_passive_button"
+                android:layout_width="@dimen/toggle_button_width"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="@dimen/button_start_margin"
+                android:layout_marginBottom="@dimen/button_bottom_margin"
+                android:text="@string/main_scanner_2"
+                android:textAllCaps="false"
+                android:textOff="@string/main_scanner_2" />
+
+            <ToggleButton
+                android:id="@+id/run_active_button"
+                android:layout_width="@dimen/toggle_button_width"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="@dimen/button_bottom_margin"
+                android:layout_marginEnd="@dimen/button_start_margin"
+                android:text="@string/main_scanner_1"
+                android:textAllCaps="false"
+                android:textOff="@string/main_scanner_1" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/home_text_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="@dimen/half_margin"
+            android:layout_marginEnd="@dimen/half_margin"
+            android:paddingTop="@dimen/half_margin"
+            android:paddingBottom="@dimen/mini_margin"
+            app:layout_constraintBottom_toBottomOf="@+id/home_layout"
+            app:layout_constraintTop_toBottomOf="@+id/inspect_button_layout"
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout_editor_absoluteX="@dimen/zero_margin">
+
+            <TextView
+                android:id="@+id/home_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="0dp"
+                android:background="@color/colorLogger"
+                android:gravity="bottom"
+                android:padding="@dimen/main_margin"
+                android:scrollbars="vertical"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="-35dp" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
